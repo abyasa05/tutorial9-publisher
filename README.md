@@ -23,3 +23,8 @@ Grafik ini mengindikasikan frekuensi pengiriman _message_ dalam beberapa menit t
 
 ![Queued message spike](/images/Screenshot_5.png)
 Dalam kasus ini, saya menjalankan _publisher_ sebanyak 5 kali dalam waktu yang berdekatan. Maka, bisa dibilang bahwa terdapat 25 _message_ yang masuk ke dalam server pada kurun waktu tersebut. Karena _subscriber_ memiliki _delay_ sebesar 10 ms dalam memproses satu _message_, sebagian _message_ yang masuk ke dalam server harus menunggu di dalam _queue_ sebelum diproses oleh _subscriber_. Pada puncaknya, terdapat sekitar 16 _message_ yang tersimpan di dalam _queue_. Jumlah _message_ ini tentu dipengaruhi oleh beberapa faktor seperti frekuensi/kecepatan _message_ yang masuk serta kecepatan _subscriber_ dalam memproses suatu _message_.<br/>
+
+
+![Run with three subscribers](/images/Screenshot_6.png)
+![Reduced queued message spike](/images/Screenshot_7.png)
+Bisa dilihat bahwa terdapat tiga _subscriber_ yang sedang terkoneksi ke server RabbitMQ. Dalam hal ini, _message broker_ akan mendistribusikan _message-message_ yang masuk secara merata ke tiap _subscriber_ yang sedang terkoneksi. Maka, ketika _publisher_ dijalankan kembali sebanyak 5 kali berturut-turut (mengirim 25 _message_), tiap _subscriber_ akan menerima dan memproses sebanyak 8-9 _message_. Pembagian proses ini membuat waktu pemrosesan keseluruhan _message_ menjadi lebih cepat, di mana hal ini ditampilkan pada _spike_ dalam grafik _queued messages_ yang relatif lebih kecil dan singkat dibandingkan pada kasus sebelumnya.
