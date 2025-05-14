@@ -10,3 +10,8 @@ _Publisher_ dan _subscriber_ mengakses URL yang sama agar keduanya terkoneksi ke
 
 
 ![Screenshot tampilan RabbitMQ](/images/Screenshot_1.png)
+<br/>
+
+![Run publisher](/images/Screenshot_2.png)
+![Message diterima subscriber](/images/Screenshot_3.png)
+Pada kasus ini, _publisher_ mengirimkan _message_ dengan nama "user_created" ke _queue_ dalam server RabbitMQ sebanyak 5 kali, di mana _message_ ini berisi data berupa `user_id` dan `user_name` (yang tersimpan dalam objek UserCreatedEventMessage). Lalu, _subscriber_ akan mendeteksi _message_ dengan nama "user_created" pada _queue_ yang sama dan jika diterima, maka _message_ tersebut akan diproses oleh `UserCreatedHandler` yang kemudian menghasilkan pesan _output_ di konsol.
